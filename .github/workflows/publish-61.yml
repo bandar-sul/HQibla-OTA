@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 6.1 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-61.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download protected 6.1 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q61.zip 'https://sdmntprseasia.oaiusercontent.com/files/00000000-7c5c-8207-b469-351865554339/raw?se=2026-10-02T14%3A45%3A23Z&sp=r&sv=2026-02-06&sr=b&scid=49cb77fc-cc29-5251-8ec0-340e9096401e&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T06%3A39%3A14Z&ske=2026-10-03T06%3A39%3A14Z&sks=b&skv=2026-02-06&sig=3zsO1HMVRB7FznSzIqHaUCEELb0I03uu99ehlcPaqys%3D'
+          rm -rf /tmp/h9q61
+          mkdir -p /tmp/h9q61
+          unzip -o /tmp/h9q61.zip -d /tmp/h9q61
+          cp /tmp/h9q61/H9-Qibla-6.1-Silent-Security-Haval-H9.apk ./H9-Qibla-6.1-Silent-Security-Haval-H9.apk
+          echo '7e8d01884869ece19ff0db86ddbf3cf9d98f1fc312f67b05f6cbd8cde155f0bd  H9-Qibla-6.1-Silent-Security-Haval-H9.apk' > H9-Qibla-6.1-Silent-Security-Haval-H9.sha256
+          sha256sum -c H9-Qibla-6.1-Silent-Security-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 61,
+            "versionName": "6.1-silent-security",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.1-Silent-Security-Haval-H9.apk",
+            "sha256": "7e8d01884869ece19ff0db86ddbf3cf9d98f1fc312f67b05f6cbd8cde155f0bd",
+            "notes": "اعتماد OTA للإصدار 6.1 وإزالة تنبيه التوقيع عند التشغيل مع إبقاء التحقق الأمني للتحديثات."
+          }
+          EOF
+      - name: Commit OTA 6.1
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-6.1-Silent-Security-Haval-H9.apk H9-Qibla-6.1-Silent-Security-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 6.1 OTA" || exit 0
+          git push
