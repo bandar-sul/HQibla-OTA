@@ -1,7 +1,7 @@
 {
-  "versionCode": 61,
-  "versionName": "6.1-silent-security",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.1-Silent-Security-Haval-H9.apk",
-  "sha256": "7e8d01884869ece19ff0db86ddbf3cf9d98f1fc312f67b05f6cbd8cde155f0bd",
-  "notes": "اعتماد OTA للإصدار 6.1 وإزالة تنبيه التوقيع عند التشغيل مع إبقاء التحقق الأمني للتحديثات."
+  "versionCode": 62,
+  "versionName": "6.2-ota-compat",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.2-OTA-Compat-Haval-H9.apk",
+  "sha256": "0aefe6345ab79a932302bd34f330c99ae50da4530a69f704e8249277ea0c9189",
+  "notes": "تحسين توافق OTA مع شاشة هافال Android 9 مع SHA-256 والتحقق من اسم الحزمة ومنع الرجوع لإصدار أقدم."
 }
