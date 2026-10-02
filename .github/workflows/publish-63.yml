@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 6.3 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-63.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 6.3 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q63.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-6828-8211-9b4a-ad2c2f36bd40/raw?se=2026-10-02T18%3A46%3A04Z&sp=r&sv=2026-02-06&sr=b&scid=565e39d8-9410-5f0c-b76f-59ecd3c6d50a&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T03%3A06%3A05Z&ske=2026-10-03T03%3A06%3A05Z&sks=b&skv=2026-02-06&sig=%2BeA2Ch57g9DxtumNpe21eJlbcVYSspndyKneQgSkym0%3D'
+          rm -rf /tmp/h9q63
+          mkdir -p /tmp/h9q63
+          unzip -o /tmp/h9q63.zip -d /tmp/h9q63
+          cp /tmp/h9q63/H9-Qibla-6.3-Arabic-Settings-Haval-H9.apk ./H9-Qibla-6.3-Arabic-Settings-Haval-H9.apk
+          echo 'bd890e4a00a80434b5ec0a20bb71db0ce4929b3b566b12f3a7a1cf8957ace699  H9-Qibla-6.3-Arabic-Settings-Haval-H9.apk' > H9-Qibla-6.3-Arabic-Settings-Haval-H9.sha256
+          sha256sum -c H9-Qibla-6.3-Arabic-Settings-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 63,
+            "versionName": "6.3-arabic-settings-ota",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.3-Arabic-Settings-Haval-H9.apk",
+            "sha256": "bd890e4a00a80434b5ec0a20bb71db0ce4929b3b566b12f3a7a1cf8957ace699",
+            "notes": "تعريب اسم التطبيق إلى قبلة، واستبدال حول بالإعدادات، ونقل قسم حول أسفل فحص التحديثات."
+          }
+          EOF
+      - name: Commit OTA 6.3
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-6.3-Arabic-Settings-Haval-H9.apk H9-Qibla-6.3-Arabic-Settings-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 6.3 OTA" || exit 0
+          git push
