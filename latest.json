@@ -1,7 +1,7 @@
 {
-  "versionCode": 63,
-  "versionName": "6.3-arabic-settings-ota",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.3-Arabic-Settings-Haval-H9.apk",
-  "sha256": "bd890e4a00a80434b5ec0a20bb71db0ce4929b3b566b12f3a7a1cf8957ace699",
-  "notes": "تعريب اسم التطبيق إلى قبلة، واستبدال حول بالإعدادات، ونقل قسم حول أسفل فحص التحديثات."
+  "versionCode": 62,
+  "versionName": "6.2-ota-compat",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.2-OTA-Compat-Haval-H9.apk",
+  "sha256": "0aefe6345ab79a932302bd34f330c99ae50da4530a69f704e8249277ea0c9189",
+  "notes": "تم إيقاف 6.3 مؤقتًا أثناء اعتماد مفتاح توقيع إنتاج جديد ثابت."
 }
