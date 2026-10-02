@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 6.2 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-62.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download protected 6.2 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q62.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-c6b0-8211-a347-40d538366fad/raw?se=2026-10-02T15%3A29%3A08Z&sp=r&sv=2026-02-06&sr=b&scid=35440665-84fe-5c69-964f-79a77244e72d&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T04%3A51%3A00Z&ske=2026-10-03T04%3A51%3A00Z&sks=b&skv=2026-02-06&sig=/4oElaIiA3%2BBo2xDly7f%2BpBDfXgZz1skj/Uy3/nqyJU%3D'
+          rm -rf /tmp/h9q62
+          mkdir -p /tmp/h9q62
+          unzip -o /tmp/h9q62.zip -d /tmp/h9q62
+          cp /tmp/h9q62/H9-Qibla-6.2-OTA-Compat-Haval-H9.apk ./H9-Qibla-6.2-OTA-Compat-Haval-H9.apk
+          echo '0aefe6345ab79a932302bd34f330c99ae50da4530a69f704e8249277ea0c9189  H9-Qibla-6.2-OTA-Compat-Haval-H9.apk' > H9-Qibla-6.2-OTA-Compat-Haval-H9.sha256
+          sha256sum -c H9-Qibla-6.2-OTA-Compat-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 62,
+            "versionName": "6.2-ota-compat",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.2-OTA-Compat-Haval-H9.apk",
+            "sha256": "0aefe6345ab79a932302bd34f330c99ae50da4530a69f704e8249277ea0c9189",
+            "notes": "تحسين توافق OTA مع شاشة هافال Android 9 مع SHA-256 والتحقق من اسم الحزمة ومنع الرجوع لإصدار أقدم."
+          }
+          EOF
+      - name: Commit OTA 6.2
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-6.2-OTA-Compat-Haval-H9.apk H9-Qibla-6.2-OTA-Compat-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 6.2 OTA" || exit 0
+          git push
