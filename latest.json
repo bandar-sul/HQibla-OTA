@@ -1,0 +1,7 @@
+{
+  "versionCode": 59,
+  "versionName": "5.9-ota-github",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-5.9-OTA-GitHub-Haval-H9.apk",
+  "sha256": "9185b54c74962c4c83937df6c8c0d9f994adab0b45de4fbc6cabcc7cf5f145c1",
+  "notes": "ربط التحديثات بمستودع OTA العام مع حماية SHA-256 والتحقق من شهادة التوقيع."
+}
