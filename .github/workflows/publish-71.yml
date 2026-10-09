@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 7.1 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-71.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.1 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q71.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-0054-8211-9d92-4d5ddd895121/raw?se=2026-10-09T19%3A31%3A25Z&sp=r&sv=2026-02-06&sr=b&scid=138850e5-836d-5229-9208-6a2dcb68698a&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-09T01%3A18%3A10Z&ske=2026-10-10T01%3A18%3A10Z&sks=b&skv=2026-02-06&sig=TmO/1SUhdm1fq7MSboaR3vmzHdxLoFlLNuu/NRkybw4%3D'
+          rm -rf /tmp/h9q71
+          mkdir -p /tmp/h9q71
+          unzip -o /tmp/h9q71.zip -d /tmp/h9q71
+          cp /tmp/h9q71/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.1-About-Button-OTA-Haval-H9.apk
+          echo 'b6b2e9073013e38ff50cbecd065c33733ccff07edcf30294283039daaf3f0679  H9-Qibla-7.1-About-Button-OTA-Haval-H9.apk' > H9-Qibla-7.1-About-Button-OTA-Haval-H9.sha256
+          sha256sum -c H9-Qibla-7.1-About-Button-OTA-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 71,
+            "versionName": "7.1-about-button-ota",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.1-About-Button-OTA-Haval-H9.apk",
+            "sha256": "b6b2e9073013e38ff50cbecd065c33733ccff07edcf30294283039daaf3f0679",
+            "notes": "نقل قسم حول إلى زر مستقل داخل الإعدادات وفتح معلومات المطور في نافذة منفصلة."
+          }
+          EOF
+      - name: Commit OTA 7.1
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.1-About-Button-OTA-Haval-H9.apk H9-Qibla-7.1-About-Button-OTA-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 7.1 OTA" || exit 0
+          git push
