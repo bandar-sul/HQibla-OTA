@@ -1,7 +1,7 @@
 {
-  "versionCode": 62,
-  "versionName": "6.2-ota-compat",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-6.2-OTA-Compat-Haval-H9.apk",
-  "sha256": "0aefe6345ab79a932302bd34f330c99ae50da4530a69f704e8249277ea0c9189",
-  "notes": "تم إيقاف 6.3 مؤقتًا أثناء اعتماد مفتاح توقيع إنتاج جديد ثابت."
+  "versionCode": 71,
+  "versionName": "7.1-about-button-ota",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.1-About-Button-OTA-Haval-H9.apk",
+  "sha256": "b6b2e9073013e38ff50cbecd065c33733ccff07edcf30294283039daaf3f0679",
+  "notes": "نقل قسم حول إلى زر مستقل داخل الإعدادات وفتح معلومات المطور في نافذة منفصلة."
 }
