@@ -1,7 +1,7 @@
 {
-  "versionCode": 72,
-  "versionName": "7.2-region-compass-ui",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.2-Region-Compass-UI-Haval-H9.apk",
-  "sha256": "518db3fb7d3adbecc657e5b422ba5f0b5a28be5bff2e2df356c8057a55d6f8e5",
-  "notes": "إزالة النص أسفل البوصلة، إظهار المدينة والمنطقة في الموقع الحالي، تحسين سرعة استجابة البوصلة، وتحديث خلفية نافذة التحديث."
+  "versionCode": 73,
+  "versionName": "7.3-region-update-dialog-fix",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.3-Region-Update-Dialog-Fix-Haval-H9.apk",
+  "sha256": "0d74fb07d5e0f1f1754e793d0d02d891ade30b007185a8d122eb2b799caa7459",
+  "notes": "إصلاح عرض المنطقة مع بديل لمناطق السعودية، واستبدال نافذة التحديث بنافذة داكنة مخصصة بالكامل."
 }
