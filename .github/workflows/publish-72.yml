@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 7.2 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-72.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.2 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q72.zip 'https://sdmntpritalynorth.oaiusercontent.com/files/00000000-1318-8246-9e48-267fae5aa9f1/raw?se=2026-10-11T10%3A08%3A16Z&sp=r&sv=2026-02-06&sr=b&scid=079210d9-6666-5a24-ac71-c35397b20f9e&skoid=82a3371f-2f6c-4f81-8a78-2701b362559b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-10T21%3A48%3A38Z&ske=2026-10-11T21%3A48%3A38Z&sks=b&skv=2026-02-06&sig=KuuzywSwPRF0/a9jcNrKehpqM9OBlOf10wPQ6K7WhDo%3D'
+          rm -rf /tmp/h9q72
+          mkdir -p /tmp/h9q72
+          unzip -o /tmp/h9q72.zip -d /tmp/h9q72
+          cp /tmp/h9q72/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.2-Region-Compass-UI-Haval-H9.apk
+          echo '518db3fb7d3adbecc657e5b422ba5f0b5a28be5bff2e2df356c8057a55d6f8e5  H9-Qibla-7.2-Region-Compass-UI-Haval-H9.apk' > H9-Qibla-7.2-Region-Compass-UI-Haval-H9.sha256
+          sha256sum -c H9-Qibla-7.2-Region-Compass-UI-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 72,
+            "versionName": "7.2-region-compass-ui",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.2-Region-Compass-UI-Haval-H9.apk",
+            "sha256": "518db3fb7d3adbecc657e5b422ba5f0b5a28be5bff2e2df356c8057a55d6f8e5",
+            "notes": "إزالة النص أسفل البوصلة، إظهار المدينة والمنطقة في الموقع الحالي، تحسين سرعة استجابة البوصلة، وتحديث خلفية نافذة التحديث."
+          }
+          EOF
+      - name: Commit OTA 7.2
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.2-Region-Compass-UI-Haval-H9.apk H9-Qibla-7.2-Region-Compass-UI-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 7.2 OTA" || exit 0
+          git push
