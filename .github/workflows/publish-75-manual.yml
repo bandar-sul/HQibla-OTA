@@ -1,0 +1,28 @@
+name: Publish H9 Qibla 7.5 Manual Download
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-75-manual.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.5 manual artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q75.zip 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-1db8-8210-a160-ffee3079b57d/raw?se=2026-10-11T15%3A59%3A32Z&sp=r&sv=2026-02-06&sr=b&scid=13f03301-7f14-537d-8799-eb93b446621e&skoid=82a3371f-2f6c-4f81-8a78-2701b362559b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-11T05%3A50%3A59Z&ske=2026-10-12T05%3A50%3A59Z&sks=b&skv=2026-02-06&sig=DpDUDg5ol%2BjYmlIkRKY9ciI/zSqzAORdOIUnB7VuAxs%3D'
+          rm -rf /tmp/h9q75
+          mkdir -p /tmp/h9q75
+          unzip -o /tmp/h9q75.zip -d /tmp/h9q75
+          cp /tmp/h9q75/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.5-Manual-Haval-H9.apk
+          sha256sum H9-Qibla-7.5-Manual-Haval-H9.apk
+      - name: Commit manual APK only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.5-Manual-Haval-H9.apk
+          git commit -m "Add H9 Qibla 7.5 manual download" || exit 0
+          git push
