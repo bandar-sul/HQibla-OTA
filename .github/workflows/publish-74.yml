@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 7.4 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-74.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.4 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q74.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-7ed0-8211-94c6-1a768718517f/raw?se=2026-10-11T14%3A52%3A34Z&sp=r&sv=2026-02-06&sr=b&scid=08fe5232-a4c5-587e-921c-cc61de291604&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-11T01%3A54%3A52Z&ske=2026-10-12T01%3A54%3A52Z&sks=b&skv=2026-02-06&sig=76hFqjZ2etA9U01yb0XL6jZIs6PpgfLYOl/AuQi4eXo%3D'
+          rm -rf /tmp/h9q74
+          mkdir -p /tmp/h9q74
+          unzip -o /tmp/h9q74.zip -d /tmp/h9q74
+          cp /tmp/h9q74/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.apk
+          echo '5d36b3bfa553ee057cec1929b607384860295944cb76762a6f0588983bae98d3  H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.apk' > H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.sha256
+          sha256sum -c H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 74,
+            "versionName": "7.4-region-update-dialog-hotfix",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.apk",
+            "sha256": "5d36b3bfa553ee057cec1929b607384860295944cb76762a6f0588983bae98d3",
+            "notes": "تحديث إجباري فوق 7.3 لإصلاح عرض المنطقة ونافذة التحديث الداكنة."
+          }
+          EOF
+      - name: Commit OTA 7.4
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.apk H9-Qibla-7.4-Region-Update-Dialog-Hotfix-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 7.4 OTA" || exit 0
+          git push
