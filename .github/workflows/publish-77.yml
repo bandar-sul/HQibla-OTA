@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 7.7 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-77.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.7 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q77.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-6134-8211-8002-090aa8ebd70d/raw?se=2026-10-12T04%3A59%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=799d7c8c-7460-51fa-8598-e67362266c86&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-12T01%3A49%3A48Z&ske=2026-10-13T01%3A49%3A48Z&sks=b&skv=2026-02-06&sig=/9z8tgrkopURrinphyNtAX2r4eUs8eCuzqCNkIacwBg%3D'
+          rm -rf /tmp/h9q77
+          mkdir -p /tmp/h9q77
+          unzip -o /tmp/h9q77.zip -d /tmp/h9q77
+          cp /tmp/h9q77/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.apk
+          echo '3aeae82c59f220a353f83828f8aba05c1004e56e28f1ddd867329bd291c14b1a  H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.apk' > H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.sha256
+          sha256sum -c H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 77,
+            "versionName": "7.7-day-region-prayer-calibration",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.apk",
+            "sha256": "3aeae82c59f220a353f83828f8aba05c1004e56e28f1ddd867329bd291c14b1a",
+            "notes": "● تحسين وضوح الوضع النهاري ورفع التباين\n● إصلاح ظهور اسم المنطقة بدون الاعتماد على Geocoder أو الإنترنت\n● تصغير حجم البوصلة بشكل أكبر\n● تعديل توقيت الفجر إلى +2 دقيقة وفق معايرة أم القرى\n● إعادة الشروق للحساب القياسي بدون زيادة\n● تحسينات عامة في الموقع والواجهة"
+          }
+          EOF
+      - name: Commit OTA 7.7
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.apk H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 7.7 OTA" || exit 0
+          git push
