@@ -1,7 +1,7 @@
 {
-  "versionCode": 77,
-  "versionName": "7.7-day-region-prayer-calibration",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.7-Day-Region-Prayer-Calibration-Haval-H9.apk",
-  "sha256": "3aeae82c59f220a353f83828f8aba05c1004e56e28f1ddd867329bd291c14b1a",
-  "notes": "● تحسين وضوح الوضع النهاري ورفع التباين\n● إصلاح ظهور اسم المنطقة بدون الاعتماد على Geocoder أو الإنترنت\n● تصغير حجم البوصلة بشكل أكبر\n● تعديل توقيت الفجر إلى +2 دقيقة وفق معايرة أم القرى\n● إعادة الشروق للحساب القياسي بدون زيادة\n● تحسينات عامة في الموقع والواجهة"
+  "versionCode": 78,
+  "versionName": "7.8-layout-compass-response",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.apk",
+  "sha256": "dd809beb93a3042593fd8bae53be6b4f83f47f459c0108f354d1c476bec1bb65",
+  "notes": "● تكبير خطوط الجهة اليمنى ومواقيت الصلاة\n● تحسين ألوان النص لتناسب الخلفية النهارية والليلية\n● إزاحة البوصلة والدائرة الخلفية قليلًا إلى اليسار\n● تصغير بطاقات وخطوط الجهة اليسرى\n● تحسين سلاسة واستجابة البوصلة\n● رفع معدل قراءة حساسات الاتجاه مع الحفاظ على أولوية اتجاه هافال/GPS\n● الإبقاء على معايرة مواقيت الصلاة وفق أم القرى"
 }
