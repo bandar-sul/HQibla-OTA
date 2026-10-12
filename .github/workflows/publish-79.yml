@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 7.9 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-79.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.9 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q79.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-60a0-8211-bfbd-94e207bd2816/raw?se=2026-10-12T08%3A10%3A31Z&sp=r&sv=2026-02-06&sr=b&scid=16ed4c08-1ce5-5a11-a563-2912fd49bab2&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-12T01%3A10%3A49Z&ske=2026-10-13T01%3A10%3A49Z&sks=b&skv=2026-02-06&sig=c%2BEu76TG1UENQGcIlx5HyrVc5UuWir75q%2BllGWmdFtQ%3D'
+          rm -rf /tmp/h9q79
+          mkdir -p /tmp/h9q79
+          unzip -o /tmp/h9q79.zip -d /tmp/h9q79
+          cp /tmp/h9q79/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.apk
+          echo 'edc15dd178afe13a1a3cfaa54c0f6a310a8763cb9fb43533eaecf766cb632175  H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.apk' > H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.sha256
+          sha256sum -c H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 79,
+            "versionName": "7.9-ui-true-north-compass",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.apk",
+            "sha256": "edc15dd178afe13a1a3cfaa54c0f6a310a8763cb9fb43533eaecf766cb632175",
+            "notes": "● تكبير خطوط الجهة اليمنى ومواقيت الصلاة\n● تعديل ألوان الخطوط لتناسب النهاري والليلي\n● تحريك البوصلة والدائرة الخلفية لليسار قليلًا\n● تصغير عناصر الجهة اليسرى والخطوط\n● تحسين استجابة البوصلة وتقليل التأخير\n● إضافة تصحيح الانحراف المغناطيسي للشمال الحقيقي"
+          }
+          EOF
+      - name: Commit OTA 7.9
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.apk H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 7.9 OTA" || exit 0
+          git push
