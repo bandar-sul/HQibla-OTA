@@ -1,0 +1,38 @@
+name: Publish H9 Qibla 7.8 OTA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-78.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download H9 Qibla 7.8 artifact
+        run: |
+          curl -L --fail --retry 3 -o /tmp/h9q78.zip 'https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-87f8-8211-b8c1-b997eba157de/raw?se=2026-10-12T07%3A08%3A02Z&sp=r&sv=2026-02-06&sr=b&scid=31e2981f-a038-5a0a-ac50-42caf151a88c&skoid=a3d7d4f3-706d-48bc-8860-17488c12cb39&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-12T01%3A13%3A05Z&ske=2026-10-13T01%3A13%3A05Z&sks=b&skv=2026-02-06&sig=TK3r1z3rpDpUPtNSNvRrWyK/wsvEdzhnsir5IBw3JkY%3D'
+          rm -rf /tmp/h9q78
+          mkdir -p /tmp/h9q78
+          unzip -o /tmp/h9q78.zip -d /tmp/h9q78
+          cp /tmp/h9q78/H9-Qibla-7.0-Production-Key-Haval-H9.apk ./H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.apk
+          echo 'dd809beb93a3042593fd8bae53be6b4f83f47f459c0108f354d1c476bec1bb65  H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.apk' > H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.sha256
+          sha256sum -c H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.sha256
+          cat > latest.json <<'EOF'
+          {
+            "versionCode": 78,
+            "versionName": "7.8-layout-compass-response",
+            "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.apk",
+            "sha256": "dd809beb93a3042593fd8bae53be6b4f83f47f459c0108f354d1c476bec1bb65",
+            "notes": "● تكبير خطوط الجهة اليمنى ومواقيت الصلاة\n● تحسين ألوان النص لتناسب الخلفية النهارية والليلية\n● إزاحة البوصلة والدائرة الخلفية قليلًا إلى اليسار\n● تصغير بطاقات وخطوط الجهة اليسرى\n● تحسين سلاسة واستجابة البوصلة\n● رفع معدل قراءة حساسات الاتجاه مع الحفاظ على أولوية اتجاه هافال/GPS\n● الإبقاء على معايرة مواقيت الصلاة وفق أم القرى"
+          }
+          EOF
+      - name: Commit OTA 7.8
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.apk H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.sha256 latest.json
+          git commit -m "Publish H9 Qibla 7.8 OTA" || exit 0
+          git push
