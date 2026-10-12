@@ -1,7 +1,7 @@
 {
-  "versionCode": 78,
-  "versionName": "7.8-layout-compass-response",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.8-Layout-Compass-Response-Haval-H9.apk",
-  "sha256": "dd809beb93a3042593fd8bae53be6b4f83f47f459c0108f354d1c476bec1bb65",
-  "notes": "● تكبير خطوط الجهة اليمنى ومواقيت الصلاة\n● تحسين ألوان النص لتناسب الخلفية النهارية والليلية\n● إزاحة البوصلة والدائرة الخلفية قليلًا إلى اليسار\n● تصغير بطاقات وخطوط الجهة اليسرى\n● تحسين سلاسة واستجابة البوصلة\n● رفع معدل قراءة حساسات الاتجاه مع الحفاظ على أولوية اتجاه هافال/GPS\n● الإبقاء على معايرة مواقيت الصلاة وفق أم القرى"
+  "versionCode": 79,
+  "versionName": "7.9-ui-true-north-compass",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.apk",
+  "sha256": "edc15dd178afe13a1a3cfaa54c0f6a310a8763cb9fb43533eaecf766cb632175",
+  "notes": "● تكبير خطوط الجهة اليمنى ومواقيت الصلاة\n● تعديل ألوان الخطوط لتناسب النهاري والليلي\n● تحريك البوصلة والدائرة الخلفية لليسار قليلًا\n● تصغير عناصر الجهة اليسرى والخطوط\n● تحسين استجابة البوصلة وتقليل التأخير\n● إضافة تصحيح الانحراف المغناطيسي للشمال الحقيقي"
 }
