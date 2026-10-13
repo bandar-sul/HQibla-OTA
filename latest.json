@@ -1,7 +1,7 @@
 {
-  "versionCode": 79,
-  "versionName": "7.9-ui-true-north-compass",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla-OTA/main/H9-Qibla-7.9-UI-True-North-Compass-Haval-H9.apk",
-  "sha256": "edc15dd178afe13a1a3cfaa54c0f6a310a8763cb9fb43533eaecf766cb632175",
-  "notes": "● تكبير خطوط الجهة اليمنى ومواقيت الصلاة\n● تعديل ألوان الخطوط لتناسب النهاري والليلي\n● تحريك البوصلة والدائرة الخلفية لليسار قليلًا\n● تصغير عناصر الجهة اليسرى والخطوط\n● تحسين استجابة البوصلة وتقليل التأخير\n● إضافة تصحيح الانحراف المغناطيسي للشمال الحقيقي"
+  "versionCode": 81,
+  "versionName": "8.1-manual",
+  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk",
+  "sha256": "10470d81785081c4e37c90d34fd7831688fd601bcd72de0be64f333fb286c630",
+  "notes": "تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب."
 }
