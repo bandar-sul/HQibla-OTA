@@ -1,6 +1,8 @@
 name: Publish verified Qibla 8.1 OTA
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
 permissions:
   contents: write
 jobs:
@@ -35,7 +37,7 @@ jobs:
               'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),
               'notes':'تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب.'
           }
-          Path('latest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+          Path('latest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+chr(10),encoding='utf-8')
           PY
       - name: Commit OTA pointer
         run: |
