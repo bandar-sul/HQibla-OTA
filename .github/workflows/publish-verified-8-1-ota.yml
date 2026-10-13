@@ -1,0 +1,45 @@
+name: Publish verified Qibla 8.1 OTA
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download 8.1 release APK
+        run: |
+          curl --fail --location --retry 3 --output /tmp/h9-qibla.apk 'https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk'
+          unzip -t /tmp/h9-qibla.apk >/dev/null
+      - name: Verify APK version and production signature
+        run: |
+          AAPT=$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -n 1)
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -n 1)
+          "$APKSIGNER" verify --print-certs /tmp/h9-qibla.apk | tee /tmp/signature.txt
+          grep -qi '0ef79fa3fc09dc6c6e0fd5eca1abb58cc4219db2e5df3bef4623ee9b89655676' /tmp/signature.txt
+          "$AAPT" dump badging /tmp/h9-qibla.apk | tee /tmp/badging.txt
+          grep -E "versionCode='81'.*versionName='8.1-manual'" /tmp/badging.txt
+          grep -F "package: name='sa.h9.qibla.stable'" /tmp/badging.txt
+      - name: Update OTA manifest
+        run: |
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          apk=Path('/tmp/h9-qibla.apk')
+          assert apk.stat().st_size > 100000
+          manifest={
+              'versionCode':81,
+              'versionName':'8.1-manual',
+              'apkUrl':'https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk',
+              'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),
+              'notes':'تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب.'
+          }
+          Path('latest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+          PY
+      - name: Commit OTA pointer
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add latest.json
+          git diff --cached --quiet || (git commit -m "Publish validated Qibla 8.1 OTA" && git push)
