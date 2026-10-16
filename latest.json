@@ -1,7 +1,7 @@
 {
-  "versionCode": 81,
-  "versionName": "8.1-manual",
-  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk",
-  "sha256": "10470d81785081c4e37c90d34fd7831688fd601bcd72de0be64f333fb286c630",
-  "notes": "تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب."
+  "versionCode": 82,
+  "versionName": "8.2-auto-ota",
+  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.2-manual/H9-Qibla-8.2-Manual-Haval-H9.apk",
+  "sha256": "65f2a3c7c71a61b477356b5699662cf561b29b46cf2a2952bafa709cc8c3a6dd",
+  "notes": "تحديث 8.2: فحص OTA تلقائي عند تشغيل التطبيق مع الإنترنت وإعادة المحاولة عند عودة الاتصال وزر فحص يدوي."
 }
