@@ -1,7 +1,7 @@
 {
-  "versionCode": 86,
-  "versionName": "8.6",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla/main/Qibla-v8.6.apk",
-  "sha256": "523BFB47A73453CD76CCFBCC25FEB44BBCE030D096BA4FD9B46B9C9475EB1618",
-  "notes": "تحديث 8.6: إصلاح أيقونة التطبيق بالنهاري والليلي، إضافة 5 خطوط عربية فاخرة والتنقل بينها، إضافة خيار خط كبير جداً، وإمكانية تبديل جهة مواقيت الصلاة يمين ويسار بضغطة زر."
+  "versionCode": 81,
+  "versionName": "8.1-manual",
+  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk",
+  "sha256": "10470d81785081c4e37c90d34fd7831688fd601bcd72de0be64f333fb286c630",
+  "notes": "تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب."
 }
