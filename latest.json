@@ -1,7 +1,7 @@
 {
-  "versionCode": 87,
-  "versionName": "8.7",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla/main/Qibla-v8.7.apk",
-  "sha256": "2A881B9032BFADC3894F4C0D534821332C2764396D33A5E4083E78B76B2EDAFF",
-  "notes": "تحديث 8.7: معالجة تناسق الخلفية الديناميكية عند تبديل المواقيت لليسار، ضبط هوامش بطاقات الصلاة للشاشات العريضة وإظهار أوقات الصلاة كاملة (ص/م)."
+  "versionCode": 81,
+  "versionName": "8.1-manual",
+  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk",
+  "sha256": "10470d81785081c4e37c90d34fd7831688fd601bcd72de0be64f333fb286c630",
+  "notes": "تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب."
 }
