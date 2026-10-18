@@ -1,7 +1,7 @@
 {
-  "versionCode": 82,
-  "versionName": "8.2-auto-ota",
-  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.2-manual/H9-Qibla-8.2-Manual-Haval-H9.apk",
-  "sha256": "65f2a3c7c71a61b477356b5699662cf561b29b46cf2a2952bafa709cc8c3a6dd",
-  "notes": "تحديث 8.2: فحص OTA تلقائي عند تشغيل التطبيق مع الإنترنت وإعادة المحاولة عند عودة الاتصال وزر فحص يدوي."
+  "versionCode": 87,
+  "versionName": "8.7",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla/main/Qibla-v8.7.apk",
+  "sha256": "2A881B9032BFADC3894F4C0D534821332C2764396D33A5E4083E78B76B2EDAFF",
+  "notes": "تحديث 8.7: معالجة تناسق الخلفية الديناميكية عند تبديل المواقيت لليسار، ضبط هوامش بطاقات الصلاة للشاشات العريضة وإظهار أوقات الصلاة كاملة (ص/م)."
 }
