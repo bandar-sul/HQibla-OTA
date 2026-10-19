@@ -1,7 +1,7 @@
 {
-  "versionCode": 88,
-  "versionName": "8.8",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla/main/Qibla-v8.8.apk",
-  "sha256": "B0075B6CBAAB3AE3CADF6B8B864D7D02442B60B725CA204C51969819FEEE21A9",
-  "notes": "تحديث 8.8: إضافة 5 خطوط عربية، خيار خط كبير جداً، زر تبديل موقع بطاقات الصلاة، وتحسين التوافق مع شاشات السيارات."
+  "versionCode": 81,
+  "versionName": "8.1-manual",
+  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk",
+  "sha256": "10470d81785081c4e37c90d34fd7831688fd601bcd72de0be64f333fb286c630",
+  "notes": "تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب."
 }
