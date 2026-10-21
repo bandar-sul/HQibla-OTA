@@ -1,7 +1,7 @@
 {
-  "versionCode": 88,
-  "versionName": "8.8",
-  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla/main/Qibla-v8.8.apk",
-  "sha256": "56C6C085A84999B5F55BB83D99F4872F0DB26A90EA35FE1588DD77BA530A27E7",
-  "notes": "تحديث 8.8 المستقر: معالجة شاملة لمشاكل إصدار 8.5، إصلاح التوافق مع شاشات السيارات، ثبات التوقيع بدون الحاجة لحذف التطبيق."
+  "versionCode": 82,
+  "versionName": "8.2-auto-ota",
+  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.2-manual/H9-Qibla-8.2-Manual-Haval-H9.apk",
+  "sha256": "65f2a3c7c71a61b477356b5699662cf561b29b46cf2a2952bafa709cc8c3a6dd",
+  "notes": "تحديث 8.2: فحص OTA تلقائي عند تشغيل التطبيق مع الإنترنت وإعادة المحاولة عند عودة الاتصال وزر فحص يدوي."
 }
