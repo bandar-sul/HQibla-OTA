@@ -1,7 +1,7 @@
 {
-  "versionCode": 81,
-  "versionName": "8.1-manual",
-  "apkUrl": "https://github.com/bandar-sul/HQibla/releases/download/v8.1-manual/H9-Qibla-8.1-Manual-Haval-H9.apk",
-  "sha256": "10470d81785081c4e37c90d34fd7831688fd601bcd72de0be64f333fb286c630",
-  "notes": "تحديث 8.1: واجهة محسنة للبوصلة وسهم أحمر، عرض اسم المدينة، إعدادات الخط والثيمات، وروابط الترحيب."
+  "versionCode": 88,
+  "versionName": "8.8",
+  "apkUrl": "https://raw.githubusercontent.com/bandar-sul/HQibla/main/Qibla-v8.8.apk",
+  "sha256": "56C6C085A84999B5F55BB83D99F4872F0DB26A90EA35FE1588DD77BA530A27E7",
+  "notes": "تحديث 8.8 المستقر: معالجة شاملة لمشاكل إصدار 8.6، توافق تام مع شاشات السيارات، ثبات التوقيع بدون الحاجة لحذف التطبيق."
 }
